@@ -41,6 +41,7 @@ public class Menu {
                 break;
             default:
                 ioPrompter.printError();
+                mainMenu();
         }
     }
 

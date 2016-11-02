@@ -54,6 +54,7 @@ public class Organizer {
                 break;
             default:
                 ioPrompter.printError();
+                makeMenuChoice();
                 break;
         }
 
@@ -77,6 +78,7 @@ public class Organizer {
                 break;
             default:
                 ioPrompter.printError();
+                makePlayerChoice(p);
                 break;
         }
 
@@ -97,6 +99,7 @@ public class Organizer {
                 break;
             default:
                 ioPrompter.printError();
+                makeTeamChoice(t);
                 break;
         }
 
@@ -118,15 +121,15 @@ public class Organizer {
 
         for (Player player : playersInTeam) {
             int heightOfPlayer = player.getHeightInInches();
-            if (heightOfPlayer >= 35 || heightOfPlayer <= 40) {
+            if (heightOfPlayer >= 35 && heightOfPlayer <= 40) {
                 Set<Player> playerSet = heightMap.get(SHORT);
                 playerSet.add(player);
                 heightMap.put(SHORT, playerSet);
-            } else if (heightOfPlayer >= 41 || heightOfPlayer <= 46) {
+            } else if (heightOfPlayer >= 41 && heightOfPlayer <= 46) {
                 Set<Player> playerSet = heightMap.get(MEDIUM);
                 playerSet.add(player);
                 heightMap.put(MEDIUM, playerSet);
-            } else if (heightOfPlayer >= 47 || heightOfPlayer <= 50) {
+            } else if (heightOfPlayer >= 47 && heightOfPlayer <= 50) {
                 Set<Player> playerSet = heightMap.get(TALL);
                 playerSet.add(player);
                 heightMap.put(TALL, playerSet);
@@ -135,6 +138,7 @@ public class Organizer {
         }
 
         ioPrompter.printHeightReport(heightMap);
+        makeTeamChoice(t);
     }
 
     private void addTeam(Map leagueMap) {
@@ -148,8 +152,8 @@ public class Organizer {
 
     private void addPlayerToTeam(Player playerToAdd) {
         ArrayList<Team> availableTeams = new ArrayList<>();
-        boolean playerExistInTeam = false;
         for (Map.Entry<Team, Set<Player>> teamandplayers : leagueMap.entrySet()) {
+            boolean playerExistInTeam = false;
             for (Player player : teamandplayers.getValue()) {
                 if (player.equals(playerToAdd)) {
                     playerExistInTeam = true;
@@ -199,13 +203,6 @@ public class Organizer {
         makeMenuChoice();
     }
 
-    private void listTeams() {
-
-    }
-
-    private void teamReport() {
-
-    }
 
     private void listAllPlayers() {
         //List all players with stats
@@ -239,6 +236,8 @@ public class Organizer {
             }
             j++;
         }
+
+        ioPrompter.printError();
         makeMenuChoice();
         return null;
     }

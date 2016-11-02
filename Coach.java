@@ -31,6 +31,7 @@ public class Coach {
                 break;
             default:
                 ioPrompter.printError();
+                makeMenuChoice();
                 break;
         }
     }
